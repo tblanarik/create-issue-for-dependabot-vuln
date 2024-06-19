@@ -23,10 +23,9 @@ jobs:
             summary=$(echo $alert | jq -r '.security_advisory.summary') 
             description=$(echo $alert | jq -r '.security_advisory.description')
             severity=$(echo $alert | jq -r '.security_advisory.severity' | tr '[:lower:]' '[:upper:]')
-            url=$(echo $alert | jq -r '.url')
-            repo_name=$(echo $alert | jq -r '.repository.name')
+            url=$(echo $alert | jq -r '.html_url')
 
-            issue_title="[$severity][$repo_name] $summary | #$number"
+            issue_title="[$severity][$REPO] $summary | #$number"
             issue_body="# Dependabot Vulnerability Alert\n\n## Description\n$description\n\n$url"
             
             existing_issues=$(gh issue list --repo my/repo --search "$issue_title in:title")
