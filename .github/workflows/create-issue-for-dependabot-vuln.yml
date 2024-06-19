@@ -29,9 +29,9 @@ jobs:
             issue_title="[$severity][$repo_name] $summary | #$number"
             issue_body="# Dependabot Vulnerability Alert\n\n## Description\n$description\n\n$url"
             
-            existing_issues=$(gh issue list --repo github/gitcoin --search "$issue_title in:title")
+            existing_issues=$(gh issue list --repo my/repo --search "$issue_title in:title")
             if [ -z "$existing_issues" ]; then
-              echo -e "$issue_body" | gh issue create --repo github/gitcoin --title "$issue_title" -l dependabot-vuln --body-file -
+              echo -e "$issue_body" | gh issue create --repo my/repo --title "$issue_title" -l dependabot-vuln --body-file -
             else
                 echo "Issues already exists for $issue_title"
             fi
